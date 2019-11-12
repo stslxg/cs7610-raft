@@ -52,7 +52,7 @@ class Connection:
 
     def __enter__(self):
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self._socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        #self._socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self._socket.setblocking(False)
         self._socket.bind((self._resolver.my_address, self._port))
         print ("binding to", self._resolver.my_address, self._port)
