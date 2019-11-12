@@ -117,7 +117,6 @@ class ClientConnection:
         self._client_to_server_conn.__exit__(exc_type, exc_value, traceback)
     
     async def receive_message_from_server(self):
-        print("c")
         data = await self._client_to_server_conn.receive_data()
         return pickle.loads(data)
 
@@ -155,6 +154,7 @@ class ServerConnection:
         return pickle.loads(data)
 
     async def receive_message_from_client(self):
+        print("c")
         data = await self._server_to_client_conn.receive_data()
         return pickle.loads(data)
 
