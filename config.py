@@ -7,5 +7,5 @@ class Config:
     MAX_SERVER = 10
     MAX_CLIENT = 1
 
-    SERVER_NAMES = ["vdi-linux-031.ccs.neu.edu", "vdi-linux-032.ccs.neu.edu", "vdi-linux-033.ccs.neu.edu"]
-    CLIENT_NAMES = ["vdi-linux-030.ccs.neu.edu"]
+    SERVER_NAMES = ["vdi-linux-032.ccs.neu.edu", "vdi-linux-033.ccs.neu.edu"]
+    CLIENT_NAMES = ["vdi-linux-031.ccs.neu.edu"]
