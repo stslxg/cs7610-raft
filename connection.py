@@ -73,7 +73,9 @@ class Connection:
         print("d", self._resolver.my_address, self._port)
         try:
             data, _ = self._socket.recvfrom(Config.BUF_SIZE)
+            print("aaaaa")
         except (BlockingIOError, InterruptedError):
+            print("blocking")
             self._loop.add_reader(self._fd, Connection.receive_data, self, fut, True)
         else:
             print("R:", data)
