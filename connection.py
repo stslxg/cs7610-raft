@@ -64,6 +64,7 @@ class Connection:
 
     # the following two functions will return future
     def receive_data(self, fut=None, registed=False):
+        print(self)
         if fut is None:
             fut = self._loop.create_future()
         if registed:

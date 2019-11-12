@@ -19,14 +19,14 @@ class Server:
 
     async def server_handler(self):
         print("I'm Server", self._id)
-        msg = Test(self._id)
-        while True:
-            await asyncio.gather(*(self._conn.send_message_to_server(msg, id)
-                for id in range(self._server_num) if id != self._id))
-            await asyncio.sleep(1)
-            msg = await self._conn.receive_message_from_server()
-            msg.handle(self)
-            msg = Test(self._id)
+        # msg = Test(self._id)
+        # while True:
+        #     await asyncio.gather(*(self._conn.send_message_to_server(msg, id)
+        #         for id in range(self._server_num) if id != self._id))
+        #     await asyncio.sleep(1)
+        #     msg = await self._conn.receive_message_from_server()
+        #     msg.handle(self)
+        #     msg = Test(self._id)
         while True:
             await asyncio.sleep(5)
             print('aaaaaaa')
@@ -34,13 +34,13 @@ class Server:
     async def client_handler(self):
         while True:
             print("b")
-            #msg = await self._conn.receive_message_from_client()
+            msg = await self._conn.receive_message_from_client()
             print('....................')
-            #msg.handle(self)
+            msg.handle(self)
             print('....................')
             await asyncio.sleep(10)
-            #msg = Test(self._id)
-            #await self._conn.send_message_to_client(msg, 0)
+            msg = Test(self._id)
+            await self._conn.send_message_to_client(msg, 0)
 
     def run(self):
         with self._conn:
