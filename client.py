@@ -74,6 +74,7 @@ class Client:
             # msg.handle(self)
 
     def run(self):
+        print(self._loop)
         with self._conn:
             self._loop.run_until_complete(Client.client_testing(self))
 
