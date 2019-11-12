@@ -89,7 +89,7 @@ class Connection:
         except (BlockingIOError, InterruptedError):
             self._loop.add_writer(self._fd, Connection.send_data, self, data, id, fut, True)
         else:
-            print("S:", data)
+            print("S:", data, "to", self._host_addresses[id], self._port)
             fut.set_result(send_len)
         return fut
 
