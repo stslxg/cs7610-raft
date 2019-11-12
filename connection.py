@@ -55,8 +55,8 @@ class Connection:
         #self._socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self._socket.setblocking(False)
         self._socket.bind((self._resolver.my_address, self._port))
-        print ("binding to", self._resolver.my_address, self._port)
         self._fd = self._socket.fileno()
+        print ("binding to", self._resolver.my_address, self._port, self._fd)
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
