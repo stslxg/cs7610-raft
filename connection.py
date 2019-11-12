@@ -69,6 +69,7 @@ class Connection:
         if registed:
             self._loop.remove_reader(self._fd)
         
+        print("d", self._resolver.my_address, self._port)
         try:
             data, _ = self._socket.recvfrom(Config.BUF_SIZE)
         except (BlockingIOError, InterruptedError):
@@ -116,6 +117,7 @@ class ClientConnection:
         self._client_to_server_conn.__exit__(exc_type, exc_value, traceback)
     
     async def receive_message_from_server(self):
+        print("c")
         data = await self._client_to_server_conn.receive_data()
         return pickle.loads(data)
 

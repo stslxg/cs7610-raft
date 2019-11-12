@@ -27,9 +27,13 @@ class Server:
         #     msg = await self._conn.receive_message_from_server()
         #     msg.handle(self)
         #     msg = Test(self._id)
+        while True:
+            await asyncio.sleep(5)
+            print('aaaaaaa')
 
     async def client_handler(self):
         while True:
+            print("b")
             msg = await self._conn.receive_message_from_client()
             print('....................')
             msg.handle(self)
