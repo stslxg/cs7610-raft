@@ -76,6 +76,7 @@ class Connection:
             print("aaaaa")
         except (BlockingIOError, InterruptedError):
             print("blocking")
+            print(self._fd, Connection.receive_data, self, fut, True)
             self._loop.add_reader(self._fd, Connection.receive_data, self, fut, True)
         else:
             print("R:", data)
