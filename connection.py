@@ -64,25 +64,25 @@ class Connection:
 
     # the following two functions will return future
     def receive_data(self, fut=None, registed=False):
-        # print(self)
-        # if fut is None:
-        #     fut = self._loop.create_future()
-        # if registed:
-        #     self._loop.remove_reader(self._fd)
+        print(self)
+        if fut is None:
+            fut = self._loop.create_future()
+        if registed:
+            self._loop.remove_reader(self._fd)
         
-        # print("d", self._resolver.my_address, self._port)
-        # try:
-        #     data, _ = self._socket.recvfrom(Config.BUF_SIZE)
-        #     print("aaaaa")
-        # except (BlockingIOError, InterruptedError):
-        #     print("blocking")
-        #     print(self._fd, Connection.receive_data, self, fut, True)
-        #     self._loop.add_reader(self._fd, Connection.receive_data, self, fut, True)
-        # else:
-        #     print("R:", data)
-        #     fut.set_result(data)
-        # return fut
-        return self._loop.sock_recv(self._socket, Config.BUF_SIZE)
+        print("d", self._resolver.my_address, self._port)
+        try:
+            data, _ = self._socket.recvfrom(Config.BUF_SIZE)
+            print("aaaaa")
+        except (BlockingIOError, InterruptedError):
+            print("blocking")
+            print(self._fd, Connection.receive_data, self, fut, True)
+            self._loop.add_reader(self._fd, Connection.receive_data, self, fut, True)
+        else:
+            print("R:", data)
+            fut.set_result(data)
+        return fut
+        #return self._loop.sock_recv(self._socket, Config.BUF_SIZE)
 
     def send_data(self, data, id, fut=None, registed=False):
         if fut is None:
