@@ -3,6 +3,7 @@
 import asyncio
 import socket
 import pickle
+import functools
 
 from config import Config
 
@@ -78,7 +79,7 @@ class Connection:
         except (BlockingIOError, InterruptedError):
             print("blocking")
             print(self._fd, Connection.receive_data, self, fut, True)
-            self._loop.add_reader(self._fd, Connection.receive_data, self, fut, True)
+            self._loop.add_reader(self._fd, functools.partial(Connection.receive_data, self, fut, True))
         else:
             print("R:", data)
             fut.set_result(data)
@@ -95,7 +96,7 @@ class Connection:
         try:
             send_len = self._socket.sendto(data, (self._host_addresses[id], self._port))
         except (BlockingIOError, InterruptedError):
-            self._loop.add_writer(self._fd, Connection.send_data, self, data, id, fut, True)
+            self._loop.add_writer(self._fd, functools.partial(Connection.send_data, self, data, id, fut, True))
         else:
             print("S:" , send_len, data[:send_len], "to", self._host_addresses[id], self._port)
             fut.set_result(send_len)
