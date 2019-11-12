@@ -86,6 +86,7 @@ class Connection:
         #return self._loop.sock_recv(self._socket, Config.BUF_SIZE)
 
     def send_data(self, data, id, fut=None, registed=False):
+        print(self._loop)
         if fut is None:
             fut = self._loop.create_future()
         if registed:

@@ -32,6 +32,7 @@ class Server:
             print('aaaaaaa')
 
     async def client_handler(self):
+        print(self._loop)
         while True:
             print("b")
             msg = await self._conn.receive_message_from_client()
