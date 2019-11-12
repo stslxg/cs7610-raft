@@ -55,8 +55,8 @@ class Connection:
         self._socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self._socket.setblocking(False)
         self._socket.bind((self._resolver.my_address, self._port))
+        print ("binding to", self._resolver.my_address, self._port)
         self._fd = self._socket.fileno()
-        print(self._fd)
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
@@ -74,6 +74,7 @@ class Connection:
         except (BlockingIOError, InterruptedError):
             self._loop.add_reader(self._fd, Connection.receive_data, self, fut, True)
         else:
+            print("R:", data)
             fut.set_result(data)
         return fut
 
@@ -88,6 +89,7 @@ class Connection:
         except (BlockingIOError, InterruptedError):
             self._loop.add_writer(self._fd, Connection.send_data, self, data, id, fut, True)
         else:
+            print("S:", data)
             fut.set_result(send_len)
         return fut
 
