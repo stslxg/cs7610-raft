@@ -70,8 +70,8 @@ class Client:
                 for id in range(len(Config.SERVER_NAMES))))
             print("sent")
             await asyncio.sleep(1)
-            msg = await self._conn.receive_message_from_server()
-            msg.handle(self)
+            # msg = await self._conn.receive_message_from_server()
+            # msg.handle(self)
 
     def run(self):
         with self._conn:
